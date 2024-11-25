@@ -1,0 +1,6 @@
+[project]
+name = "decentralized-vaccine-network"
+
+[contracts.decentralized-vaccine]
+path = "contracts/decentralized-vaccine.clar"
+clarity_version = 1
