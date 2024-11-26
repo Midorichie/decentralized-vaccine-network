@@ -1,52 +1,79 @@
-# Decentralized Vaccine Development Network
+# Decentralized Vaccine Research Platform
 
 ## Overview
-A Clarity smart contract for secure, decentralized sharing of parasite genome research data on the Stacks blockchain.
-
-## Project Purpose
-Accelerate vaccine and drug development by enabling researchers to securely share and manage parasite genome information.
+A blockchain-based platform for secure and transparent genome data submission and collaboration in vaccine research.
 
 ## Features
 - Secure genome data submission
-- Granular access permission management
-- Immutable research data storage
-- Researcher-controlled data access
+- Duplicate prevention mechanism
+- Multi-researcher association
+- Immutable data tracking
 
-## Prerequisites
-- Clarinet
-- Stacks development environment
-- Git
-
-## Installation
+## Setup and Installation
+1. Install Clarinet
 ```bash
-git clone [repository-url]
-cd decentralized-vaccine-network
-clarinet check
-clarinet console
+deno install --allow-read --allow-write --allow-net --name clarinet https://deno.land/x/clarinet@v1.0.4/index.ts
 ```
 
-## Smart Contract Functions
-- `submit-genome-data`: Add new genome research
-- `get-genome-submission`: Retrieve specific genome data
-- `update-access-permissions`: Modify data access rights
-- `remove-genome-submission`: Delete submission
+2. Clone the repository
+```bash
+git clone https://github.com/your-org/decentralized-vaccine-research.git
+cd decentralized-vaccine-research
+```
 
-## Security Considerations
-- Owner-controlled submissions
-- Data immutability
-- Access permission controls
-
-## Testing
-Run comprehensive tests:
+3. Run tests
 ```bash
 clarinet test
 ```
 
-## Deployment
-Prepare network-specific configurations before deploying to Stacks mainnet or testnet.
+## Smart Contract Functionality
+- `submit-genome-data`: Submit unique genome research data
+- `get-genome-submission`: Retrieve specific genome submission
+- `get-researcher-submissions`: List submissions by researcher
 
-## License
-[Specify License]
+## Error Handling
+- `ERR-NOT-AUTHORIZED`: Unauthorized access attempt
+- `ERR-DATA-EXISTS`: Duplicate genome submission
+- `ERR-INVALID-DATA`: Invalid input data
+- `ERR-NOT-FOUND`: Submission not found
 
 ## Contributing
-[Contribution Guidelines]
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a pull request
+
+## License
+MIT License
+```
+
+4. Continuous Integration Configuration
+
+name: Clarinet CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    
+    - name: Install Clarinet
+      run: |
+        deno install --allow-read --allow-write --allow-net --name clarinet https://deno.land/x/clarinet@v1.0.4/index.ts
+        echo "$HOME/.deno/bin" >> $GITHUB_PATH
+    
+    - name: Run Contract Tests
+      run: clarinet test
